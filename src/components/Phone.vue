@@ -8,12 +8,9 @@
   </div>
   <div class="description">
     <DrawLine class="draw" ref="draw" />
-    <span v-for="description in descriptions" :key="description.id" :ref="twinkle">
-      {{ description }}
-    </span>
-    <p ref="des1">고사양 카메라</p>
-    <p ref="des2">스피커</p>
-    <p ref="des3">아이패드 / 아이팟 연결</p>
+    <p v-for="description in descriptions" :key="description.id" :ref="stagger">
+      {{ description.text }}
+    </p>
   </div>
 </template>
 
@@ -36,10 +33,14 @@ export default {
     const intro2 = ref()
     const intro3 = ref()
     const draw = ref()
+
+    const descriptionArray = ref([])
+    const stagger = (el) => descriptionArray.value.push(el)
     const description = ref()
-    const des1 = ref() // 지우기?
-    const des2 = ref()
-    const des3 = ref()
+    const descriptions = ref([
+      { id: 1, text: '고사양 카메라' },
+      { id: 2, text: '스피커' },
+      { id: 3, text: '아이패드 / 아이팟' }])
 
     onMounted(() => {
       scrollTo(0, 0)
@@ -78,9 +79,11 @@ export default {
           const dracoLoader = new DRACOLoader()
           dracoLoader.setDecoderPath('https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/js/libs/draco/')
           gltfLoader.setDRACOLoader(dracoLoader)
-          gltfLoader.load('phone.gltf', (model) => {
+          const group = new THREE.Group()
+          // iphone
+          gltfLoader.load('/models/phone/phone.gltf', (model) => {
             const phone = model.scene
-            phone.position.set(0, -1.35, 7.5)
+            phone.position.set(-0.1, -1.35, 7.5)
             phone.rotation.set(0, 0.2, 0)
             scene.add(phone)
             phone.format = THREE.RGBAFormat
@@ -89,6 +92,39 @@ export default {
               duration: 360,
               repeat: -1,
               ease: 'none'
+            })
+            // ipad
+            gltfLoader.load('/models/ipad/ipad.gltf', (model) => {
+              const ipad = model.scene
+              ipad.position.set(-0.1, -1.35, 7.5)
+              ipad.rotation.set(0, 0.2, 0)
+              group.add(ipad)
+              ipad.format = THREE.RGBAFormat
+            })
+            // airpods
+            gltfLoader.load('/models/airpods/airpods.gltf', (model) => {
+              const airpods = model.scene
+              airpods.position.set(-0.1, -1.35, -35)
+              airpods.rotation.set(0, 0.2, 0)
+              group.add(airpods)
+              airpods.format = THREE.RGBAFormat
+            })
+            // macbook
+            gltfLoader.load('/models/macbook/macbook.gltf', (model) => {
+              const macbook = model.scene
+              macbook.position.set(-0.5, -0.1, 9)
+              macbook.rotation.set(0.5, 1.5, 0)
+              group.add(macbook)
+              macbook.format = THREE.RGBAFormat
+            })
+            // watch
+            gltfLoader.load('/models/watch/watch.gltf', (model) => {
+              const watch = model.scene
+              watch.position.set(-5.5, -0.1, -180)
+              watch.rotation.set(1.5, 0, 0)
+              group.add(watch)
+              scene.add(group)
+              watch.format = THREE.RGBAFormat
             })
 
             // 글자 애니메이션
@@ -132,7 +168,7 @@ export default {
                 }
               }, '<')
               .from('.line', { opacity: 0 }, '>')
-              .fromTo('.dd > p', { opacity: 0, xPercent: 50 }, { opacity: 1, xPercent: 0, stagger: 0.4 }, '>')
+              .fromTo(descriptionArray.value, { opacity: 0, xPercent: 10 }, { opacity: 1, xPercent: 0, stagger: 0.4 }, '>')
           })
           animate()
         }
@@ -159,10 +195,10 @@ export default {
       intro2,
       intro3,
       draw,
+      descriptionArray,
+      stagger,
       description,
-      des1,
-      des2,
-      des3
+      descriptions
     }
   },
   components: {
@@ -196,7 +232,9 @@ export default {
   align-items: center;
   z-index: 2;
   p {
+    text-align: center;
     position: absolute;
+    word-break: keep-all;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 4.5em;
     opacity: 0;
@@ -205,7 +243,7 @@ export default {
 }
 .description {
   position: fixed;
-  transform: translate(14%, -7%);
+  transform: translate(20%, -7%);
   width: 100%;
   height: 100vh;
   color: white;
@@ -223,6 +261,7 @@ export default {
     position: relative;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 1.5em;
+    opacity: 0;
     margin: 0;
   }
 }

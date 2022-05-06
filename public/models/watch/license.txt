@@ -1,0 +1,11 @@
+Model Information:
+* title:	Apple Watch
+* source:	https://sketchfab.com/3d-models/apple-watch-4bf804c0b2ed44bd92da4ae23be0753c
+* author:	iSteven (https://sketchfab.com/Steven007)
+
+Model License:
+* license type:	CC-BY-NC-SA-4.0 (http://creativecommons.org/licenses/by-nc-sa/4.0/)
+* requirements:	Author must be credited. No commercial use. Modified versions must have the same license.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Apple Watch" (https://sketchfab.com/3d-models/apple-watch-4bf804c0b2ed44bd92da4ae23be0753c) by iSteven (https://sketchfab.com/Steven007) licensed under CC-BY-NC-SA-4.0 (http://creativecommons.org/licenses/by-nc-sa/4.0/)
