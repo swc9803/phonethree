@@ -12,6 +12,9 @@
       {{ description.text }}
     </p>
   </div>
+  <div class="maskrap">
+    <div class="mask" ref="mask" />
+  </div>
 </template>
 
 <script>
@@ -33,6 +36,7 @@ export default {
     const intro2 = ref()
     const intro3 = ref()
     const draw = ref()
+    const mask = ref()
 
     const descriptionArray = ref([])
     const stagger = (el) => descriptionArray.value.push(el)
@@ -169,6 +173,18 @@ export default {
               }, '<')
               .from('.line', { opacity: 0 }, '>')
               .fromTo(descriptionArray.value, { opacity: 0, xPercent: 10 }, { opacity: 1, xPercent: 0, stagger: 0.4 }, '>')
+
+            // 마스크 애니메이션
+            const maskScrollAni = gsap.timeline({
+              scrollTrigger: {
+                trigger: cover.value,
+                start: '70% top', // 글자 애니메이션 end 후 바로
+                end: '100%',
+                scrub: 2
+              }
+            })
+            maskScrollAni
+              .to(mask.value, { clipPath: 'circle(50%)' })
           })
           animate()
         }
@@ -198,7 +214,8 @@ export default {
       descriptionArray,
       stagger,
       description,
-      descriptions
+      descriptions,
+      mask
     }
   },
   components: {
@@ -247,6 +264,7 @@ export default {
   width: 100%;
   height: 100vh;
   color: white;
+  mix-blend-mode: difference;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -263,6 +281,21 @@ export default {
     font-size: 1.5em;
     opacity: 0;
     margin: 0;
+  }
+}
+.maskrap {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  .mask {
+    position: relative;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    width: 500%;
+    height: 500%;
+    background: white;
+    clip-path: circle(0%);
   }
 }
 </style>
