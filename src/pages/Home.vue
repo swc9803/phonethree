@@ -1,25 +1,30 @@
 <template>
-  <div class="section">
+  <div class="section1">
     <Phone />
   </div>
+  <!-- <div class="section2"> -->
+    <!-- <Accessories /> -->
+  <!-- </div> -->
 </template>
 
 <script>
 import Phone from '@/components/Phone.vue'
+// import Accessories from '@/components/Accessories.vue'
 export default {
   setup () {
 
   },
   components: {
     Phone
+    // Accessories
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.section {
+.section1 {
   width: 100%;
-  height: 400vh;
+  height: 1000vh;
   background: rgb(20, 20, 20);
   p {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -31,4 +36,9 @@ export default {
     z-index: 1;
   }
 }
+// .section2 {
+//   width: 100%;
+//   height: 400vh;
+//   background: rgb(20, 20, 20);
+// }
 </style>

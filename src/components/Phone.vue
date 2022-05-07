@@ -135,8 +135,8 @@ export default {
             const textScrollAni = gsap.timeline({
               scrollTrigger: {
                 trigger: cover.value,
-                start: '10% top',
-                end: '40%',
+                start: '3% top',
+                end: '25%',
                 scrub: 1
               }
             })
@@ -151,8 +151,8 @@ export default {
             const phoneScrollAni = gsap.timeline({
               scrollTrigger: {
                 trigger: cover.value,
-                start: '40% top', // 글자 애니메이션 end 후 바로
-                end: '50%',
+                start: '25% top', // 글자 애니메이션 end 후 바로
+                end: '55%',
                 scrub: 2,
                 onLeaveBack: () => {
                   animation1.pause()
@@ -178,7 +178,7 @@ export default {
             const maskScrollAni = gsap.timeline({
               scrollTrigger: {
                 trigger: cover.value,
-                start: '70% top', // 글자 애니메이션 end 후 바로
+                start: '70% top',
                 end: '100%',
                 scrub: 2
               }
@@ -228,7 +228,7 @@ export default {
 .cover {
   position: absolute;
   width: 100%;
-  height: 400vh;
+  height: 1000vh;
   background: rgba(20, 20, 20, 0.8);
   z-index: 1;
 }
@@ -287,6 +287,7 @@ export default {
   position: fixed;
   width: 100%;
   height: 100vh;
+  z-index: 1;
   .mask {
     position: relative;
     transform: translate(-50%, -50%);
