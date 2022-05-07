@@ -61,31 +61,31 @@ export default {
             group.add(ipad)
             ipad.format = THREE.RGBAFormat
           })
-          // airpods
-          gltfLoader.load('/models/airpods/airpods.gltf', (model) => {
-            const airpods = model.scene
-            airpods.position.set(20, -1.35, -35)
-            airpods.rotation.set(0.3, -0.4, 0.3)
-            group.add(airpods)
-            airpods.format = THREE.RGBAFormat
-          })
-          // macbook
-          gltfLoader.load('/models/macbook/macbook.gltf', (model) => {
-            const macbook = model.scene
-            macbook.position.set(-0.5, -0.1, 8.9)
-            macbook.rotation.set(0.6, 2, 0)
-            group.add(macbook)
-            macbook.format = THREE.RGBAFormat
-          })
-          // watch
-          gltfLoader.load('/models/watch/watch.gltf', (model) => {
-            const watch = model.scene
-            watch.position.set(-5.5, -0.1, -180)
-            watch.rotation.set(1.5, 0, -0.5)
-            group.add(watch)
-            scene.add(group)
-            watch.format = THREE.RGBAFormat
-          })
+          // // airpods
+          // gltfLoader.load('/models/airpods/airpods.gltf', (model) => {
+          //   const airpods = model.scene
+          //   airpods.position.set(20, -1.35, -35)
+          //   airpods.rotation.set(0.3, -0.4, 0.3)
+          //   group.add(airpods)
+          //   airpods.format = THREE.RGBAFormat
+          // })
+          // // macbook
+          // gltfLoader.load('/models/macbook/macbook.gltf', (model) => {
+          //   const macbook = model.scene
+          //   macbook.position.set(-0.5, -0.1, 8.9)
+          //   macbook.rotation.set(0.6, 2, 0)
+          //   group.add(macbook)
+          //   macbook.format = THREE.RGBAFormat
+          // })
+          // // watch
+          // gltfLoader.load('/models/watch/watch.gltf', (model) => {
+          //   const watch = model.scene
+          //   watch.position.set(-5.5, -0.1, -180)
+          //   watch.rotation.set(1.5, 0, -0.5)
+          //   group.add(watch)
+          //   scene.add(group)
+          //   watch.format = THREE.RGBAFormat
+          // })
 
           animate()
         }

@@ -7,7 +7,7 @@
     <p ref="intro3">모든 것을 갖춘</p>
   </div>
   <div class="description">
-    <DrawLine class="draw" ref="draw" />
+    <DrawLine class="draw" />
     <p v-for="description in descriptions" :key="description.id" :ref="stagger">
       {{ description.text }}
     </p>
@@ -35,7 +35,6 @@ export default {
     const intro1 = ref()
     const intro2 = ref()
     const intro3 = ref()
-    const draw = ref()
     const mask = ref()
 
     const descriptionArray = ref([])
@@ -43,8 +42,9 @@ export default {
     const description = ref()
     const descriptions = ref([
       { id: 1, text: '고사양 카메라' },
-      { id: 2, text: '스피커' },
-      { id: 3, text: '아이패드 / 아이팟' }])
+      { id: 2, text: '고음질 스피커' },
+      { id: 3, text: '뛰어난 주변 기기들' }
+    ])
 
     onMounted(() => {
       scrollTo(0, 0)
@@ -86,8 +86,8 @@ export default {
           // iphone
           gltfLoader.load('/models/phone/phone.gltf', (model) => {
             const phone = model.scene
-            phone.position.set(-0.1, -1.35, 7.5)
-            phone.rotation.set(0, 0.2, 0)
+            phone.position.set(0.02, 0, 9.25)
+            phone.rotation.set(0, 3.5, 0)
             scene.add(phone)
             phone.format = THREE.RGBAFormat
             animation1.to(phone.rotation, {
@@ -122,16 +122,16 @@ export default {
                 scrub: 2,
                 onLeaveBack: () => {
                   animation1.pause()
-                  gsap.set(phone.rotation, { y: 0 })
+                  gsap.set(phone.rotation, { y: 3.5 })
                 }
               }
             })
             phoneScrollAni
               .to(cover.value, { background: 'rgba(20, 20, 20, 0)' })
-              .to(phone.rotation, { y: 6.3 }, '>')
+              .to(phone.rotation, { y: 9 }, '>')
               .to(phone.position, {
-                x: 3,
-                z: 3,
+                x: 0.6,
+                z: 8.8,
                 onComplete () {
                   animation1.restart()
                   document.querySelector('.line').style.animationPlayState = 'running'
@@ -151,6 +151,21 @@ export default {
             })
             maskScrollAni
               .to(mask.value, { clipPath: 'circle(50%)' })
+
+            // descriptionText 애니메이션
+            const descriptionTextAni = gsap.timeline({
+              scrollTrigger: {
+                trigger: cover.value,
+                start: '80% top',
+                end: '85%',
+                scrub: 1
+              }
+            })
+            descriptionTextAni
+              .to('.draw', { y: -100 })
+              .to(descriptionArray.value[0], { opacity: 0, xPercent: -10 }, '<')
+              .to(descriptionArray.value[1], { opacity: 0, xPercent: -10 }, '<')
+              .to(descriptionArray.value[2], { opacity: 1, y: -220 }, '<')
           })
           animate()
         }
@@ -176,7 +191,6 @@ export default {
       intro1,
       intro2,
       intro3,
-      draw,
       descriptionArray,
       stagger,
       description,
@@ -246,7 +260,7 @@ export default {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 1.5em;
     opacity: 0;
-    margin: 0;
+    margin: 2px 0;
   }
 }
 .maskrap {
