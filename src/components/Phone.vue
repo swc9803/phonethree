@@ -83,7 +83,6 @@ export default {
           const dracoLoader = new DRACOLoader()
           dracoLoader.setDecoderPath('https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/js/libs/draco/')
           gltfLoader.setDRACOLoader(dracoLoader)
-          const group = new THREE.Group()
           // iphone
           gltfLoader.load('/models/phone/phone.gltf', (model) => {
             const phone = model.scene
@@ -96,39 +95,6 @@ export default {
               duration: 360,
               repeat: -1,
               ease: 'none'
-            })
-            // ipad
-            gltfLoader.load('/models/ipad/ipad.gltf', (model) => {
-              const ipad = model.scene
-              ipad.position.set(-0.1, -1.35, 7.5)
-              ipad.rotation.set(0, 0.2, 0)
-              group.add(ipad)
-              ipad.format = THREE.RGBAFormat
-            })
-            // airpods
-            gltfLoader.load('/models/airpods/airpods.gltf', (model) => {
-              const airpods = model.scene
-              airpods.position.set(-0.1, -1.35, -35)
-              airpods.rotation.set(0, 0.2, 0)
-              group.add(airpods)
-              airpods.format = THREE.RGBAFormat
-            })
-            // macbook
-            gltfLoader.load('/models/macbook/macbook.gltf', (model) => {
-              const macbook = model.scene
-              macbook.position.set(-0.5, -0.1, 9)
-              macbook.rotation.set(0.5, 1.5, 0)
-              group.add(macbook)
-              macbook.format = THREE.RGBAFormat
-            })
-            // watch
-            gltfLoader.load('/models/watch/watch.gltf', (model) => {
-              const watch = model.scene
-              watch.position.set(-5.5, -0.1, -180)
-              watch.rotation.set(1.5, 0, 0)
-              group.add(watch)
-              scene.add(group)
-              watch.format = THREE.RGBAFormat
             })
 
             // 글자 애니메이션

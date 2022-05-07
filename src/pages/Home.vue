@@ -2,21 +2,21 @@
   <div class="section1">
     <Phone />
   </div>
-  <!-- <div class="section2"> -->
-    <!-- <Accessories /> -->
-  <!-- </div> -->
+  <div class="section2">
+    <Accessories />
+  </div>
 </template>
 
 <script>
 import Phone from '@/components/Phone.vue'
-// import Accessories from '@/components/Accessories.vue'
+import Accessories from '@/components/Accessories.vue'
 export default {
   setup () {
 
   },
   components: {
-    Phone
-    // Accessories
+    Phone,
+    Accessories
   }
 }
 </script>
@@ -36,9 +36,10 @@ export default {
     z-index: 1;
   }
 }
-// .section2 {
-//   width: 100%;
-//   height: 400vh;
-//   background: rgb(20, 20, 20);
-// }
+.section2 {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  z-index: 9;
+}
 </style>
