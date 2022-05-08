@@ -43,7 +43,7 @@ export default {
     const descriptions = ref([
       { id: 1, text: '고사양 카메라' },
       { id: 2, text: '고음질 스피커' },
-      { id: 3, text: '뛰어난 주변 기기들' }
+      { id: 3, text: '호환가능한 주변 기기들' }
     ])
 
     onMounted(() => {
@@ -156,16 +156,16 @@ export default {
             const descriptionTextAni = gsap.timeline({
               scrollTrigger: {
                 trigger: cover.value,
-                start: '80% top',
-                end: '85%',
+                start: '82% top',
+                end: '87%',
                 scrub: 1
               }
             })
             descriptionTextAni
-              .to('.draw', { y: -100 })
-              .to(descriptionArray.value[0], { opacity: 0, xPercent: -10 }, '<')
-              .to(descriptionArray.value[1], { opacity: 0, xPercent: -10 }, '<')
-              .to(descriptionArray.value[2], { opacity: 1, y: -220 }, '<')
+              .to('.draw', { y: -150 })
+              .to(descriptionArray.value[0], { opacity: 0, rotate: -90 }, '<')
+              .to(descriptionArray.value[1], { opacity: 0, rotate: -90 }, '<')
+              .to(descriptionArray.value[2], { opacity: 1, y: -270 }, '<')
           })
           animate()
         }
@@ -261,6 +261,7 @@ export default {
     font-size: 1.5em;
     opacity: 0;
     margin: 2px 0;
+    transform-origin: left center;
   }
 }
 .maskrap {

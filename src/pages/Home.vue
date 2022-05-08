@@ -40,6 +40,6 @@ export default {
   position: relative;
   width: 100%;
   height: 100vh;
-  z-index: 9;
+  z-index: 3;
 }
 </style>

@@ -24,7 +24,7 @@ export default {
         const near = 0.1
         const far = 2000
         const camera = new THREE.PerspectiveCamera(fov, aspect, near, far)
-        camera.position.set(0, 0, 10)
+        camera.position.set(0, 0, 100)
 
         const renderer = new THREE.WebGLRenderer({
           antialias: true,
@@ -54,39 +54,47 @@ export default {
           dracoLoader.setDecoderPath('https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/js/libs/draco/')
           gltfLoader.setDRACOLoader(dracoLoader)
           const group = new THREE.Group()
+          // ipad
           gltfLoader.load('/models/ipad/ipad.gltf', (model) => {
             const ipad = model.scene
-            ipad.position.set(-0.1, -1.35, 7.5)
-            ipad.rotation.set(0, 0.5, 0)
+            ipad.position.set(0, 0, 0)
+            ipad.rotation.set(0.3, -2.5, 0)
             group.add(ipad)
             ipad.format = THREE.RGBAFormat
+            gsap.set(ipad.scale, { x: 7, y: 7, z: 7 })
+            gsap.to(ipad.rotation, { y: 50, duration: 100, ease: 'none', repeat: -1 })
           })
-          // // airpods
-          // gltfLoader.load('/models/airpods/airpods.gltf', (model) => {
-          //   const airpods = model.scene
-          //   airpods.position.set(20, -1.35, -35)
-          //   airpods.rotation.set(0.3, -0.4, 0.3)
-          //   group.add(airpods)
-          //   airpods.format = THREE.RGBAFormat
-          // })
-          // // macbook
-          // gltfLoader.load('/models/macbook/macbook.gltf', (model) => {
-          //   const macbook = model.scene
-          //   macbook.position.set(-0.5, -0.1, 8.9)
-          //   macbook.rotation.set(0.6, 2, 0)
-          //   group.add(macbook)
-          //   macbook.format = THREE.RGBAFormat
-          // })
-          // // watch
-          // gltfLoader.load('/models/watch/watch.gltf', (model) => {
-          //   const watch = model.scene
-          //   watch.position.set(-5.5, -0.1, -180)
-          //   watch.rotation.set(1.5, 0, -0.5)
-          //   group.add(watch)
-          //   scene.add(group)
-          //   watch.format = THREE.RGBAFormat
-          // })
-
+          // airpods
+          gltfLoader.load('/models/airpods/airpods.gltf', (model) => {
+            const airpods = model.scene
+            airpods.position.set(-5.5, -1, 0)
+            airpods.rotation.set(0.3, -0.4, 0.3)
+            group.add(airpods)
+            airpods.format = THREE.RGBAFormat
+            gsap.set(airpods.scale, { x: 0.3, y: 0.3, z: 0.3 })
+            gsap.to(airpods.rotation, { y: 70, duration: 100, ease: 'none', repeat: -1 })
+          })
+          // watch
+          gltfLoader.load('/models/watch/watch.gltf', (model) => {
+            const watch = model.scene
+            watch.position.set(5.5, 0, 0)
+            watch.rotation.set(1.5, 0, -0.5)
+            group.add(watch)
+            scene.add(group)
+            watch.format = THREE.RGBAFormat
+            gsap.set(watch.scale, { x: 0.06, y: 0.06, z: 0.06 })
+            gsap.to(watch.rotation, { z: -50, duration: 100, ease: 'none', repeat: -1 })
+          })
+          const accessoriesScroll = gsap.timeline({
+            scrollTrigger: {
+              trigger: '.cover',
+              start: '86% top',
+              end: '87%',
+              scrub: 1
+            }
+          })
+          accessoriesScroll.fromTo(accessoriesRender.value, { opacity: 0 }, { opacity: 1 })
+          // gsap.to(group.rotation, { y: 50, duration: 100, ease: 'none', repeat: -1 })
           animate()
         }
 
@@ -118,7 +126,7 @@ export default {
   transform: translate(0, -50%);
   top: 50%;
   width: 100%;
-  height: 100vh;
+  height: 1000vh;
   .accessories {
     width: 100%;
     height: 100%;
