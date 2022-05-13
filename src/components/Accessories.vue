@@ -2,6 +2,7 @@
   <div class="accessoriesWrap">
     <div class="accessories" ref="accessoriesRender" />
   </div>
+  <div class="ending" />
 </template>
 
 <script>
@@ -14,7 +15,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 export default {
-  setup () {
+  props: {
+    cover: Object
+  },
+  setup (props) {
     const accessoriesRender = ref()
 
     onMounted(() => {
@@ -87,14 +91,13 @@ export default {
           })
           const accessoriesScroll = gsap.timeline({
             scrollTrigger: {
-              trigger: '.cover',
-              start: '86% top',
-              end: '87%',
+              trigger: props.cover,
+              start: '82% top',
+              end: '83%',
               scrub: 1
             }
           })
-          accessoriesScroll.fromTo(accessoriesRender.value, { opacity: 0 }, { opacity: 1 })
-          // gsap.to(group.rotation, { y: 50, duration: 100, ease: 'none', repeat: -1 })
+          accessoriesScroll.fromTo(accessoriesRender.value, { opacity: 0, y: 100 }, { opacity: 1, y: 0 })
           animate()
         }
 
@@ -131,5 +134,13 @@ export default {
     width: 100%;
     height: 100%;
   }
+}
+.ending {
+  position: relative;
+  transform: translate(0, 50%);
+  top: -50%;
+  width: 100%;
+  height: 100vh;
+  background: black;
 }
 </style>

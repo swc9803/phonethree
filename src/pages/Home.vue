@@ -1,18 +1,26 @@
 <template>
   <div class="section1">
-    <Phone />
+    <Phone @passCover="passCover" />
   </div>
   <div class="section2">
-    <Accessories />
+    <Accessories :cover="cover" />
   </div>
 </template>
 
 <script>
+import { ref } from 'vue'
 import Phone from '@/components/Phone.vue'
 import Accessories from '@/components/Accessories.vue'
 export default {
   setup () {
-
+    const cover = ref()
+    const passCover = (coverData) => {
+      cover.value = coverData
+    }
+    return {
+      cover,
+      passCover
+    }
   },
   components: {
     Phone,

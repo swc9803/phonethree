@@ -1,19 +1,21 @@
 <template>
-  <div class="cover" ref="cover" />
-  <div class="renderPhone" ref="renderPhone" />
-  <div class="intro">
-    <p ref="intro1">놀라운 기능</p>
-    <p ref="intro2">깔끔한 디자인</p>
-    <p ref="intro3">모든 것을 갖춘</p>
-  </div>
-  <div class="description">
-    <DrawLine class="draw" />
-    <p v-for="description in descriptions" :key="description.id" :ref="stagger">
-      {{ description.text }}
-    </p>
-  </div>
-  <div class="maskrap">
-    <div class="mask" ref="mask" />
+  <div>
+    <div class="cover" ref="cover" />
+    <div class="renderPhone" ref="renderPhone" />
+    <div class="intro">
+      <p ref="intro1">놀라운 기능</p>
+      <p ref="intro2">깔끔한 디자인</p>
+      <p ref="intro3">모든 것을 갖춘</p>
+    </div>
+    <div class="description">
+      <DrawLine class="draw" />
+      <p v-for="description in descriptions" :key="description.id" :ref="stagger">
+        {{ description.text }}
+      </p>
+    </div>
+    <div class="maskrap">
+      <div class="mask" ref="mask" />
+    </div>
   </div>
 </template>
 
@@ -28,8 +30,11 @@ import DrawLine from '@/components/DrawLine.vue'
 gsap.registerPlugin(ScrollTrigger)
 
 export default {
-  setup () {
+  setup (props, { emit }) {
     const cover = ref()
+    const passCover = (coverData) => {
+      emit('coverData', cover.value)
+    }
     const renderPhone = ref()
     const animation1 = gsap.timeline({ paused: true })
     const intro1 = ref()
@@ -48,6 +53,7 @@ export default {
 
     onMounted(() => {
       scrollTo(0, 0)
+      passCover()
       function boxAni () {
         const fov = 75
         const aspect = renderPhone.value.clientWidth / renderPhone.value.clientHeight
@@ -174,6 +180,7 @@ export default {
           requestAnimationFrame(animate)
           renderer.render(scene, camera)
         }
+        scrollTo(0, 0)
         init()
 
         function onWindowResize () {
@@ -186,6 +193,7 @@ export default {
       boxAni()
     })
     return {
+      passCover,
       cover,
       renderPhone,
       intro1,
