@@ -2,7 +2,6 @@
   <div class="accessoriesWrap">
     <div class="accessories" ref="accessoriesRender" />
   </div>
-  <div class="ending" />
 </template>
 
 <script>
@@ -92,8 +91,8 @@ export default {
           const accessoriesScroll = gsap.timeline({
             scrollTrigger: {
               trigger: props.cover,
-              start: '82% top',
-              end: '83%',
+              start: '78% top',
+              end: '79%',
               scrub: 1
             }
           })
@@ -129,18 +128,10 @@ export default {
   transform: translate(0, -50%);
   top: 50%;
   width: 100%;
-  height: 1000vh;
+  height: 900vh;
   .accessories {
     width: 100%;
     height: 100%;
   }
-}
-.ending {
-  position: relative;
-  transform: translate(0, 50%);
-  top: -50%;
-  width: 100%;
-  height: 100vh;
-  background: black;
 }
 </style>
