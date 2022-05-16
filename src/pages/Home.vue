@@ -1,4 +1,7 @@
 <template>
+  <transition name="loadingFade">
+    <div v-show="phoneLoading" class="loading">Loading...</div>
+  </transition>
   <div class="section1">
     <Phone @passCover="passCover" />
   </div>
@@ -13,11 +16,17 @@ import Phone from '@/components/Phone.vue'
 import Accessories from '@/components/Accessories.vue'
 export default {
   setup () {
+    const phoneLoading = ref(true)
     const cover = ref()
     const passCover = (coverData) => {
       cover.value = coverData
     }
+    setTimeout(() => {
+      phoneLoading.value = false
+      document.querySelector('#app').style.overflow = 'visible'
+    }, 1700)
     return {
+      phoneLoading,
       cover,
       passCover
     }
@@ -30,6 +39,28 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.loading {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  background: rgb(20, 20, 20);
+  color: rgb(255, 255, 255);
+  font-size: 5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+.loadingFade-enter-active,
+.loadingFade-leave-active {
+  transition: all 0.5s ease;
+}
+.loadingFade-enter-from,
+.loadingFade-leave-to {
+  opacity: 0;
+  transform: translateY(-30px);
+}
 .section1 {
   width: 100%;
   height: 1000vh;
